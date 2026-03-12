@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, Link } from "react-router";
+import { Routes, Route, Navigate, Link, NavLink } from "react-router";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./domains/auth/model/auth.store";
 import DashboardPage from "./pages/DashboardPage.tsx";
@@ -11,29 +11,44 @@ export default function App() {
   const logout = useAuthStore((state) => state.logout);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen text-slate-900">
       <div className="mx-auto max-w-6xl px-6 py-8">
-        <nav className="mb-8 flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+        <nav className="mb-8 flex items-center justify-between gap-3 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)]/95 p-3 shadow-[0_10px_30px_rgba(32,24,18,0.06)] backdrop-blur">
           <div className="flex items-center gap-3">
+            <span className="rounded-md border border-[var(--border-soft)] bg-[#ece4d8] px-2 py-1 text-xs font-semibold tracking-wide text-[var(--text-muted)]">
+              Order Ops
+            </span>
             {isAuthenticated ? (
               <>
-                <Link
+                <NavLink
                   to="/dashboard"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                  className={({ isActive }) =>
+                    `rounded-md px-3 py-2 text-sm font-semibold transition ${
+                      isActive
+                        ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
+                        : "text-[var(--text-muted)] hover:bg-[#eee7dc]"
+                    }`
+                  }
                 >
                   Dashboard
-                </Link>
-                <Link
+                </NavLink>
+                <NavLink
                   to="/orders"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                  className={({ isActive }) =>
+                    `rounded-md px-3 py-2 text-sm font-semibold transition ${
+                      isActive
+                        ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
+                        : "text-[var(--text-muted)] hover:bg-[#eee7dc]"
+                    }`
+                  }
                 >
                   Orders
-                </Link>
+                </NavLink>
               </>
             ) : (
               <Link
                 to="/login"
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                className="rounded-md px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-[#eee7dc]"
               >
                 Login
               </Link>
@@ -41,11 +56,11 @@ export default function App() {
           </div>
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
-              <span className="text-sm text-slate-600">{username}</span>
+              <span className="text-sm text-[var(--text-muted)]">{username}</span>
               <button
                 type="button"
                 onClick={logout}
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+                className="rounded-md border border-[var(--border-soft)] bg-[#f4ecdf] px-3 py-2 text-sm font-semibold text-[var(--text-primary)] transition hover:bg-[#eadfcd]"
               >
                 Logout
               </button>

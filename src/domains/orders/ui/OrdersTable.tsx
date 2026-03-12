@@ -94,13 +94,13 @@ export function OrdersTable({
   });
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
       {orders.length === 0 ? (
-        <p className="text-sm text-slate-500">No orders yet.</p>
+        <p className="text-sm text-[var(--text-muted)]">No orders yet.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className="border-b border-slate-200 text-slate-500">
+            <thead className="border-b border-[var(--border-soft)] text-[var(--text-muted)]">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
@@ -118,7 +118,7 @@ export function OrdersTable({
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="border-b border-slate-100">
+                <tr key={row.id} className="border-b border-[#ece3d8]">
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="py-3 pr-4">
                       {flexRender(

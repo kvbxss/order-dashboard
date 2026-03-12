@@ -47,7 +47,7 @@ export const createOrdersTableColumns = ({
               destinationCountry: e.target.value,
             }))
           }
-          className="w-full rounded-lg border border-slate-300 px-2 py-1 outline-none focus:border-slate-500"
+          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
         row.original.destinationCountry
@@ -67,7 +67,7 @@ export const createOrdersTableColumns = ({
               shippingDate: e.target.value,
             }))
           }
-          className="w-full rounded-lg border border-slate-300 px-2 py-1 outline-none focus:border-slate-500"
+          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
         row.original.shippingDate
@@ -84,7 +84,7 @@ export const createOrdersTableColumns = ({
           step="0.01"
           value={draft.price}
           onChange={(e) => setDraft((prev) => ({ ...prev, price: e.target.value }))}
-          className="w-full rounded-lg border border-slate-300 px-2 py-1 outline-none focus:border-slate-500"
+          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
         `$${row.original.price.toFixed(2)}`
@@ -96,43 +96,43 @@ export const createOrdersTableColumns = ({
     cell: ({ row }) => (
       <div className="flex flex-col gap-1">
         <div className="flex gap-2">
-        {editingId === row.original.id ? (
-          <>
-            <button
-              onClick={() => onSaveEdit(row.original.id)}
-              disabled={!canSaveEdit || isMutating}
-              className="rounded-lg px-3 py-1 text-sm font-medium text-emerald-700 hover:bg-emerald-50 disabled:cursor-not-allowed disabled:text-emerald-300"
-            >
-              {isMutating ? "Saving..." : "Save"}
-            </button>
-            <button
-              onClick={onCancelEdit}
-              disabled={isMutating}
-              className="rounded-lg px-3 py-1 text-sm font-medium text-slate-700 hover:bg-slate-100 disabled:cursor-not-allowed disabled:text-slate-300"
-            >
-              Cancel
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={() => onStartEdit(row.original)}
-              disabled={isMutating}
-              className="rounded-lg px-3 py-1 text-sm font-medium text-blue-700 hover:bg-blue-50 disabled:cursor-not-allowed disabled:text-blue-300"
-            >
-              Edit
-            </button>
-            <button
-              onClick={async () => {
-                await onDeleteOrder(row.original.id);
-              }}
-              disabled={isMutating}
-              className="rounded-lg px-3 py-1 text-sm font-medium text-red-600 hover:bg-red-50 disabled:cursor-not-allowed disabled:text-red-300"
-            >
-              {isMutating ? "Deleting..." : "Delete"}
-            </button>
-          </>
-        )}
+          {editingId === row.original.id ? (
+            <>
+              <button
+                onClick={() => onSaveEdit(row.original.id)}
+                disabled={!canSaveEdit || isMutating}
+                className="rounded-lg bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                {isMutating ? "Saving..." : "Save"}
+              </button>
+              <button
+                onClick={onCancelEdit}
+                disabled={isMutating}
+                className="rounded-lg border border-[var(--border-soft)] px-3 py-1 text-sm font-medium text-[var(--text-muted)] hover:bg-[#f3ebe0] disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                Cancel
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => onStartEdit(row.original)}
+                disabled={isMutating}
+                className="rounded-lg bg-[#dbe9ff] px-3 py-1 text-sm font-medium text-[#244d8f] hover:bg-[#c6ddff] disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                Edit
+              </button>
+              <button
+                onClick={async () => {
+                  await onDeleteOrder(row.original.id);
+                }}
+                disabled={isMutating}
+                className="rounded-lg bg-[#ffe4dc] px-3 py-1 text-sm font-medium text-[#992f12] hover:bg-[#ffd7cc] disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                {isMutating ? "Deleting..." : "Delete"}
+              </button>
+            </>
+          )}
         </div>
         {editingId === row.original.id && !canSaveEdit ? (
           <span className="text-xs text-red-600">{draftErrorMessage}</span>

@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+:root {
+  --bg-canvas: #f6f2ea;
+  --bg-panel: #fffdf8;
+  --text-primary: #1f1a17;
+  --text-muted: #6a615b;
+  --border-soft: #d8cfc4;
+  --accent: #174c3c;
+  --accent-contrast: #f4efe6;
+}
+
+body {
+  font-family: "Segoe UI Variable Text", "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(23, 76, 60, 0.11), transparent 32%),
+    radial-gradient(circle at 92% 18%, rgba(157, 113, 57, 0.12), transparent 30%),
+    linear-gradient(180deg, #f7f4ed 0%, var(--bg-canvas) 100%);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Segoe UI Variable Display", "Segoe UI", "Trebuchet MS", sans-serif;
+  letter-spacing: -0.02em;
+}

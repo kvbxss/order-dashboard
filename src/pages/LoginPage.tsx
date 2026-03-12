@@ -38,9 +38,9 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="text-2xl font-bold tracking-tight">Login</h2>
-      <p className="mt-1 text-sm text-slate-600">
+    <section className="mx-auto max-w-md rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-6 shadow-[0_14px_32px_rgba(24,18,12,0.08)]">
+      <h2 className="text-3xl font-bold tracking-tight">Login</h2>
+      <p className="mt-1 text-sm text-[var(--text-muted)]">
         Use any non-empty username and password.
       </p>
 
@@ -50,19 +50,19 @@ export default function LoginPage() {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-slate-500"
+          className="w-full rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-slate-500"
+          className="w-full rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
         />
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-800"
+          className="w-full rounded-xl bg-[var(--accent)] px-4 py-2 font-semibold text-[var(--accent-contrast)] transition hover:brightness-95"
         >
           Sign in
         </button>

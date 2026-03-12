@@ -15,27 +15,27 @@ export default function DashboardPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="text-4xl font-bold tracking-tight">Dashboard</h2>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
           Calculated metrics derived from the central store.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Total Orders</p>
+        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Total Orders</p>
           <p className="mt-2 text-3xl font-semibold">{totalOrders}</p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Total Revenue</p>
+        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Total Revenue</p>
           <p className="mt-2 text-3xl font-semibold">
             ${totalPrice.toFixed(2)}
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-sm text-slate-500">Unique Countries</p>
+        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Unique Countries</p>
           <p className="mt-2 text-3xl font-semibold">{uniqueCountries}</p>
         </div>
       </div>

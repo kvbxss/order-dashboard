@@ -27,17 +27,20 @@ export default function OrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
-        <p className="mt-1 text-sm text-slate-600">
+        <h2 className="text-4xl font-bold tracking-tight">Orders</h2>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
           Create and manage orders from a single source of truth.
         </p>
         {mutationError ? (
-          <p className="mt-2 text-sm text-red-600" role="status">
+          <p
+            className="mt-3 inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
+            role="status"
+          >
             {mutationError}{" "}
             <button
               type="button"
               onClick={clearMutationError}
-              className="font-medium underline underline-offset-2"
+              className="font-semibold underline underline-offset-2"
             >
               Dismiss
             </button>
