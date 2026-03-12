@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate, Link, NavLink } from "react-router";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth.store";
+import { ui } from "./styles/ui";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import OrdersPage from "./pages/OrdersPage.tsx";
@@ -13,9 +14,9 @@ export default function App() {
   return (
     <div className="min-h-screen text-slate-900">
       <div className="mx-auto max-w-6xl px-6 py-8">
-        <nav className="mb-8 flex items-center justify-between gap-3 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)]/95 p-3 shadow-[0_10px_30px_rgba(32,24,18,0.06)] backdrop-blur">
+        <nav className={ui.navShell}>
           <div className="flex items-center gap-3">
-            <span className="rounded-md border border-[var(--border-soft)] bg-[#ece4d8] px-2 py-1 text-xs font-semibold tracking-wide text-[var(--text-muted)]">
+            <span className={ui.navPill}>
               Order Management Dashboard
             </span>
             {isAuthenticated ? (
@@ -23,10 +24,10 @@ export default function App() {
                 <NavLink
                   to="/dashboard"
                   className={({ isActive }) =>
-                    `rounded-md px-3 py-2 text-sm font-semibold transition ${
+                    `${ui.navLinkBase} ${
                       isActive
-                        ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
-                        : "text-[var(--text-muted)] hover:bg-[#eee7dc]"
+                        ? ui.navLinkActive
+                        : ui.navLinkIdle
                     }`
                   }
                 >
@@ -35,10 +36,10 @@ export default function App() {
                 <NavLink
                   to="/orders"
                   className={({ isActive }) =>
-                    `rounded-md px-3 py-2 text-sm font-semibold transition ${
+                    `${ui.navLinkBase} ${
                       isActive
-                        ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
-                        : "text-[var(--text-muted)] hover:bg-[#eee7dc]"
+                        ? ui.navLinkActive
+                        : ui.navLinkIdle
                     }`
                   }
                 >
@@ -48,7 +49,7 @@ export default function App() {
             ) : (
               <Link
                 to="/login"
-                className="rounded-md px-3 py-2 text-sm font-semibold text-[var(--text-muted)] transition hover:bg-[#eee7dc]"
+                className={`${ui.navLinkBase} ${ui.navLinkIdle}`}
               >
                 Login
               </Link>
@@ -56,9 +57,7 @@ export default function App() {
           </div>
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
-              <span className="text-sm text-[var(--text-muted)]">
-                {username}
-              </span>
+              <span className={`text-sm ${ui.mutedText}`}>{username}</span>
               <button
                 type="button"
                 onClick={logout}

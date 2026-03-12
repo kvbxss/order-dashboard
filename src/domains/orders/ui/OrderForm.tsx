@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { validateOrderDraft } from "../model/order.validation";
+import { ui } from "../../../styles/ui";
 
 type OrderFormProps = {
   onAddOrder: (data: {
@@ -50,7 +51,7 @@ export function OrderForm({ onAddOrder, isSubmitting }: OrderFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid gap-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)] md:grid-cols-4"
+      className={`grid gap-4 md:grid-cols-4 ${ui.panel} ${ui.panelPadding} ${ui.panelShadow}`}
     >
       <input
         type="text"
@@ -58,7 +59,7 @@ export function OrderForm({ onAddOrder, isSubmitting }: OrderFormProps) {
         value={destinationCountry}
         onChange={(e) => setDestinationCountry(e.target.value)}
         aria-invalid={Boolean(submitAttempted && validationErrors.destinationCountry)}
-        className="rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
+        className={ui.formInput}
       />
 
       <input
@@ -66,7 +67,7 @@ export function OrderForm({ onAddOrder, isSubmitting }: OrderFormProps) {
         value={shippingDate}
         onChange={(e) => setShippingDate(e.target.value)}
         aria-invalid={Boolean(submitAttempted && validationErrors.shippingDate)}
-        className="rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
+        className={ui.formInput}
       />
 
       <input
@@ -77,13 +78,13 @@ export function OrderForm({ onAddOrder, isSubmitting }: OrderFormProps) {
         value={price}
         onChange={(e) => setPrice(e.target.value)}
         aria-invalid={Boolean(submitAttempted && validationErrors.price)}
-        className="rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
+        className={ui.formInput}
       />
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-[var(--accent)] px-4 py-2 font-semibold text-[var(--accent-contrast)] transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-55"
+        className={`${ui.buttonPrimary} ${ui.buttonDisabled}`}
       >
         {isSubmitting ? "Saving..." : "Add order"}
       </button>

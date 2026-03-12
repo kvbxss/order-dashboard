@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-table";
 import type { Order } from "../../model/order.types";
 import { validateOrderDraft } from "../../model/order.validation";
+import { ui } from "../../../../styles/ui";
 import {
   createOrdersTableColumns,
   type OrderDraft,
@@ -90,13 +91,13 @@ export function OrdersTable({
   });
 
   return (
-    <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
+    <div className={`${ui.panel} ${ui.panelPadding} ${ui.panelShadow}`}>
       {orders.length === 0 ? (
-        <p className="text-sm text-[var(--text-muted)]">No orders yet.</p>
+        <p className={`text-sm ${ui.mutedText}`}>No orders yet.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className="border-b border-[var(--border-soft)] text-[var(--text-muted)]">
+            <thead className={`border-b border-[var(--border-soft)] ${ui.mutedText}`}>
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (

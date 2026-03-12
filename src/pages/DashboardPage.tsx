@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useOrderStore } from "../store/order.store";
+import { ui } from "../styles/ui";
 import {
   getTotalOrders,
   getTotalPrice,
@@ -16,8 +17,8 @@ export default function DashboardPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="text-4xl font-bold tracking-tight">Dashboard</h2>
-        <p className="mt-1 text-sm text-[var(--text-muted)]">
+        <h2 className={ui.pageTitle}>Dashboard</h2>
+        <p className={ui.leadText}>
           Calculated metrics derived from the central store.
         </p>
       </div>
@@ -36,15 +37,15 @@ export default function DashboardPage() {
       ) : null}
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+        <div className={`${ui.panel} ${ui.panelPadding} ${ui.panelShadow}`}>
+          <p className={`text-sm uppercase tracking-wide ${ui.mutedText}`}>
             Total Orders
           </p>
           <p className="mt-2 text-3xl font-semibold">{totalOrders}</p>
         </div>
 
-        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+        <div className={`${ui.panel} ${ui.panelPadding} ${ui.panelShadow}`}>
+          <p className={`text-sm uppercase tracking-wide ${ui.mutedText}`}>
             Total Revenue
           </p>
           <p className="mt-2 text-3xl font-semibold">
@@ -52,8 +53,8 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+        <div className={`${ui.panel} ${ui.panelPadding} ${ui.panelShadow}`}>
+          <p className={`text-sm uppercase tracking-wide ${ui.mutedText}`}>
             Unique Countries
           </p>
           <p className="mt-2 text-3xl font-semibold">{uniqueCountries}</p>

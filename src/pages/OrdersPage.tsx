@@ -1,4 +1,5 @@
 import { useOrderStore } from "../store/order.store";
+import { ui } from "../styles/ui";
 import { OrderForm } from "../domains/orders/ui/OrderForm";
 import { OrdersTable } from "../domains/orders/ui/ordersTable/OrdersTable";
 
@@ -28,7 +29,7 @@ export default function OrdersPage() {
   return (
     <section className="space-y-6">
       <div>
-        <h2 className="text-4xl font-bold tracking-tight">Orders</h2>
+        <h2 className={ui.pageTitle}>Orders</h2>
         {mutationError ? (
           <p
             className="mt-3 inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"

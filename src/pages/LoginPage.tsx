@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router";
 import { useAuthStore } from "../store/auth.store";
+import { ui } from "../styles/ui";
 
 type LocationState = {
   from?: {
@@ -38,9 +39,11 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="mx-auto max-w-md rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-6 shadow-[0_14px_32px_rgba(24,18,12,0.08)]">
+    <section
+      className={`mx-auto max-w-md ${ui.panel} p-6 shadow-[0_14px_32px_rgba(24,18,12,0.08)]`}
+    >
       <h2 className="text-3xl font-bold tracking-tight">Login</h2>
-      <p className="mt-1 text-sm text-[var(--text-muted)]">
+      <p className={ui.leadText}>
         Use any non-empty username and password.
       </p>
 
@@ -50,19 +53,19 @@ export default function LoginPage() {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
+          className={`w-full ${ui.formInput}`}
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-xl border border-[var(--border-soft)] bg-white px-3 py-2 outline-none transition focus:border-[var(--accent)]"
+          className={`w-full ${ui.formInput}`}
         />
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-[var(--accent)] px-4 py-2 font-semibold text-[var(--accent-contrast)] transition hover:brightness-95"
+          className={`w-full ${ui.buttonPrimary}`}
         >
           Sign in
         </button>
