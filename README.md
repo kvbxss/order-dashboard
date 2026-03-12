@@ -1,7 +1,5 @@
 # Order Management Dashboard
 
-Frontend assignment implementation for a logistics order dashboard.
-
 ## Run
 
 ```bash
@@ -25,10 +23,9 @@ npm run test
 - `src/components`: cross-cutting UI infrastructure (`ProtectedRoute`, `AppErrorBoundary`).
 
 State management uses Zustand with persisted slices:
+
 - `order.store.ts` is the single source of truth for orders.
 - `auth.store.ts` manages simple login session state.
-
-## How This Addresses The Evaluation Criteria
 
 ### Data Integrity
 
@@ -62,4 +59,4 @@ State management uses Zustand with persisted slices:
 
 - `order.selectors.test.ts`: metric correctness.
 - `order.validation.test.ts`: normalization and invalid payload rejection.
-- `order.store.test.ts`: CRUD operations and immediate metric consistency.
+- `order.mutations.test.ts`: CRUD operations and immediate metric consistency.

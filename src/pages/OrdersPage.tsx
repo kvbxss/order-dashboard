@@ -1,17 +1,20 @@
 import { useOrderStore } from "../store/order.store";
 import { ui } from "../styles/ui";
+import { useOrderMutations } from "../domains/orders/model/order.mutations";
 import { OrderForm } from "../domains/orders/ui/OrderForm";
 import { OrdersTable } from "../domains/orders/ui/ordersTable/OrdersTable";
 
 export default function OrdersPage() {
   const orders = useOrderStore((state) => state.orders);
-  const isMutating = useOrderStore((state) => state.isMutating);
-  const mutationError = useOrderStore((state) => state.mutationError);
-  const clearMutationError = useOrderStore((state) => state.clearMutationError);
   const resetOrders = useOrderStore((state) => state.resetOrders);
-  const createOrder = useOrderStore((state) => state.createOrder);
-  const updateOrder = useOrderStore((state) => state.updateOrder);
-  const deleteOrder = useOrderStore((state) => state.deleteOrder);
+  const {
+    isMutating,
+    mutationError,
+    clearMutationError,
+    createOrder,
+    updateOrder,
+    deleteOrder,
+  } = useOrderMutations();
 
   const handleAddOrder = async (data: {
     destinationCountry: string;

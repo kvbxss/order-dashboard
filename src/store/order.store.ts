@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { orderApi } from "../domains/orders/model/order.api";
 import type { Order } from "../domains/orders/model/order.types";
 import {
   sanitizeOrder,
@@ -9,106 +8,34 @@ import {
 
 type OrderState = {
   orders: Order[];
-  isMutating: boolean;
-  mutationError: string | null;
-  createOrder: (order: Order) => Promise<boolean>;
-  updateOrder: (
+  addOrder: (order: Order) => void;
+  patchOrder: (
     id: string,
     data: Pick<Order, "destinationCountry" | "shippingDate" | "price">,
-  ) => Promise<boolean>;
-  deleteOrder: (id: string) => Promise<boolean>;
-  clearMutationError: () => void;
+  ) => void;
+  removeOrder: (id: string) => void;
   resetOrders: () => void;
 };
 
 export const useOrderStore = create<OrderState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       orders: [],
-      isMutating: false,
-      mutationError: null,
-      createOrder: async (order) => {
-        set({ isMutating: true, mutationError: null });
-
-        try {
-          const created = await orderApi.createOrder(order);
-
-          if (
-            get().orders.some(
-              (existingOrder) => existingOrder.id === created.id,
-            )
-          ) {
-            throw new Error("Order id already exists.");
-          }
-
-          set((state) => ({
-            orders: [...state.orders, created],
-          }));
-
-          return true;
-        } catch (error) {
-          const message =
-            error instanceof Error ? error.message : "Creating order failed.";
-          set({ mutationError: message });
-          return false;
-        } finally {
-          set({ isMutating: false });
-        }
-      },
-      updateOrder: async (id, data) => {
-        set({ isMutating: true, mutationError: null });
-
-        try {
-          const sanitized = await orderApi.updateOrder(data);
-          const hasOrder = get().orders.some((order) => order.id === id);
-
-          if (!hasOrder) {
-            throw new Error("Order not found.");
-          }
-
-          set((state) => ({
-            orders: state.orders.map((order) =>
-              order.id === id ? { ...order, ...sanitized } : order,
-            ),
-          }));
-
-          return true;
-        } catch (error) {
-          const message =
-            error instanceof Error ? error.message : "Updating order failed.";
-          set({ mutationError: message });
-          return false;
-        } finally {
-          set({ isMutating: false });
-        }
-      },
-      deleteOrder: async (id) => {
-        set({ isMutating: true, mutationError: null });
-
-        try {
-          await orderApi.deleteOrder(id);
-          const hasOrder = get().orders.some((order) => order.id === id);
-
-          if (!hasOrder) {
-            throw new Error("Order not found.");
-          }
-
-          set((state) => ({
-            orders: state.orders.filter((order) => order.id !== id),
-          }));
-
-          return true;
-        } catch (error) {
-          const message =
-            error instanceof Error ? error.message : "Deleting order failed.";
-          set({ mutationError: message });
-          return false;
-        } finally {
-          set({ isMutating: false });
-        }
-      },
-      clearMutationError: () => set({ mutationError: null }),
-      resetOrders: () => set({ orders: [], mutationError: null }),
+      addOrder: (order) =>
+        set((state) => ({
+          orders: [...state.orders, order],
+        })),
+      patchOrder: (id, data) =>
+        set((state) => ({
+          orders: state.orders.map((order) =>
+            order.id === id ? { ...order, ...data } : order,
+          ),
+        })),
+      removeOrder: (id) =>
+        set((state) => ({
+          orders: state.orders.filter((order) => order.id !== id),
+        })),
+      resetOrders: () => set({ orders: [] }),
     }),
     {
       name: "orders-storage",

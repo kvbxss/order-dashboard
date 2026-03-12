@@ -97,7 +97,9 @@ export function OrdersTable({
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full text-left text-sm">
-            <thead className={`border-b border-[var(--border-soft)] ${ui.mutedText}`}>
+            <thead
+              className={`border-b border-(--border-soft) ${ui.mutedText}`}
+            >
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
