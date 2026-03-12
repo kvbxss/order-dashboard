@@ -1,8 +1,11 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { Order } from "./order.types";
-import { orderApi } from "./order.api";
-import { sanitizeOrder, sanitizeOrderData } from "./order.validation";
+import { orderApi } from "../domains/orders/model/order.api";
+import type { Order } from "../domains/orders/model/order.types";
+import {
+  sanitizeOrder,
+  sanitizeOrderData,
+} from "../domains/orders/model/order.validation";
 
 type OrderState = {
   orders: Order[];
@@ -15,6 +18,7 @@ type OrderState = {
   ) => Promise<boolean>;
   deleteOrder: (id: string) => Promise<boolean>;
   clearMutationError: () => void;
+  resetOrders: () => void;
 };
 
 export const useOrderStore = create<OrderState>()(
@@ -104,6 +108,7 @@ export const useOrderStore = create<OrderState>()(
         }
       },
       clearMutationError: () => set({ mutationError: null }),
+      resetOrders: () => set({ orders: [], mutationError: null }),
     }),
     {
       name: "orders-storage",

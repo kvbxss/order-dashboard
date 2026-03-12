@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate, Link, NavLink } from "react-router";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { useAuthStore } from "./domains/auth/model/auth.store";
+import { useAuthStore } from "./store/auth.store";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import OrdersPage from "./pages/OrdersPage.tsx";
@@ -16,7 +16,7 @@ export default function App() {
         <nav className="mb-8 flex items-center justify-between gap-3 rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)]/95 p-3 shadow-[0_10px_30px_rgba(32,24,18,0.06)] backdrop-blur">
           <div className="flex items-center gap-3">
             <span className="rounded-md border border-[var(--border-soft)] bg-[#ece4d8] px-2 py-1 text-xs font-semibold tracking-wide text-[var(--text-muted)]">
-              Order Ops
+              Order Management Dashboard
             </span>
             {isAuthenticated ? (
               <>
@@ -56,7 +56,9 @@ export default function App() {
           </div>
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
-              <span className="text-sm text-[var(--text-muted)]">{username}</span>
+              <span className="text-sm text-[var(--text-muted)]">
+                {username}
+              </span>
               <button
                 type="button"
                 onClick={logout}

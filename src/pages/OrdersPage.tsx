@@ -1,12 +1,13 @@
-import { useOrderStore } from "../domains/orders/model/order.store";
+import { useOrderStore } from "../store/order.store";
 import { OrderForm } from "../domains/orders/ui/OrderForm";
-import { OrdersTable } from "../domains/orders/ui/OrdersTable";
+import { OrdersTable } from "../domains/orders/ui/ordersTable/OrdersTable";
 
 export default function OrdersPage() {
   const orders = useOrderStore((state) => state.orders);
   const isMutating = useOrderStore((state) => state.isMutating);
   const mutationError = useOrderStore((state) => state.mutationError);
   const clearMutationError = useOrderStore((state) => state.clearMutationError);
+  const resetOrders = useOrderStore((state) => state.resetOrders);
   const createOrder = useOrderStore((state) => state.createOrder);
   const updateOrder = useOrderStore((state) => state.updateOrder);
   const deleteOrder = useOrderStore((state) => state.deleteOrder);
@@ -28,9 +29,6 @@ export default function OrdersPage() {
     <section className="space-y-6">
       <div>
         <h2 className="text-4xl font-bold tracking-tight">Orders</h2>
-        <p className="mt-1 text-sm text-[var(--text-muted)]">
-          Create and manage orders from a single source of truth.
-        </p>
         {mutationError ? (
           <p
             className="mt-3 inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700"
@@ -46,6 +44,15 @@ export default function OrdersPage() {
             </button>
           </p>
         ) : null}
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={resetOrders}
+            className="rounded-md border border-[var(--border-soft)] bg-[#f4ecdf] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)] transition hover:bg-[#eadfcd]"
+          >
+            Reset orders
+          </button>
+        </div>
       </div>
 
       <OrderForm onAddOrder={handleAddOrder} isSubmitting={isMutating} />

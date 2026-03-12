@@ -1,4 +1,5 @@
-import { useOrderStore } from "../domains/orders/model/order.store";
+import { Link } from "react-router";
+import { useOrderStore } from "../store/order.store";
 import {
   getTotalOrders,
   getTotalPrice,
@@ -21,21 +22,40 @@ export default function DashboardPage() {
         </p>
       </div>
 
+      {totalOrders === 0 ? (
+        <div className="rounded-2xl border border-dashed border-[var(--border-soft)] bg-[var(--bg-panel)] p-4 text-sm text-[var(--text-muted)]">
+          No orders yet. Create your first order in{" "}
+          <Link
+            to="/orders"
+            className="font-semibold text-[var(--accent)] underline underline-offset-2"
+          >
+            Orders
+          </Link>
+          .
+        </div>
+      ) : null}
+
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Total Orders</p>
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+            Total Orders
+          </p>
           <p className="mt-2 text-3xl font-semibold">{totalOrders}</p>
         </div>
 
         <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Total Revenue</p>
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+            Total Revenue
+          </p>
           <p className="mt-2 text-3xl font-semibold">
             ${totalPrice.toFixed(2)}
           </p>
         </div>
 
         <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-panel)] p-5 shadow-[0_10px_24px_rgba(24,18,12,0.06)]">
-          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">Unique Countries</p>
+          <p className="text-sm uppercase tracking-wide text-[var(--text-muted)]">
+            Unique Countries
+          </p>
           <p className="mt-2 text-3xl font-semibold">{uniqueCountries}</p>
         </div>
       </div>

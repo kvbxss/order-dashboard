@@ -4,8 +4,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import type { Order } from "../model/order.types";
-import { validateOrderDraft } from "../model/order.validation";
+import type { Order } from "../../model/order.types";
+import { validateOrderDraft } from "../../model/order.validation";
 import {
   createOrdersTableColumns,
   type OrderDraft,
@@ -79,10 +79,6 @@ export function OrdersTable({
     onSaveEdit: saveEditing,
     onCancelEdit: cancelEditing,
     canSaveEdit,
-    draftErrorMessage:
-      draftErrors.destinationCountry ??
-      draftErrors.shippingDate ??
-      draftErrors.price,
     isMutating,
     onDeleteOrder,
   });

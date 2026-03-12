@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router";
-import { useAuthStore } from "../domains/auth/model/auth.store";
+import { useAuthStore } from "../store/auth.store";
 
 type LocationState = {
   from?: {

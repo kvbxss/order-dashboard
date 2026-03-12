@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
-import type { Order } from "../model/order.types";
+import type { Order } from "../../model/order.types";
 
 export type OrderDraft = {
   destinationCountry: string;
@@ -16,7 +16,6 @@ type CreateOrdersTableColumnsArgs = {
   onSaveEdit: (id: string) => Promise<void>;
   onCancelEdit: () => void;
   canSaveEdit: boolean;
-  draftErrorMessage?: string;
   isMutating: boolean;
   onDeleteOrder: (id: string) => Promise<boolean>;
 };
@@ -29,7 +28,6 @@ export const createOrdersTableColumns = ({
   onSaveEdit,
   onCancelEdit,
   canSaveEdit,
-  draftErrorMessage,
   isMutating,
   onDeleteOrder,
 }: CreateOrdersTableColumnsArgs): ColumnDef<Order>[] => [
@@ -47,10 +45,12 @@ export const createOrdersTableColumns = ({
               destinationCountry: e.target.value,
             }))
           }
-          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
+          className="h-9 w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
-        row.original.destinationCountry
+        <span className="inline-flex h-9 items-center">
+          {row.original.destinationCountry}
+        </span>
       ),
   },
   {
@@ -67,10 +67,12 @@ export const createOrdersTableColumns = ({
               shippingDate: e.target.value,
             }))
           }
-          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
+          className="h-9 w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
-        row.original.shippingDate
+        <span className="inline-flex h-9 items-center">
+          {row.original.shippingDate}
+        </span>
       ),
   },
   {
@@ -83,32 +85,34 @@ export const createOrdersTableColumns = ({
           min="0"
           step="0.01"
           value={draft.price}
-          onChange={(e) => setDraft((prev) => ({ ...prev, price: e.target.value }))}
-          className="w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
+          onChange={(e) =>
+            setDraft((prev) => ({ ...prev, price: e.target.value }))
+          }
+          className="h-9 w-full rounded-lg border border-[var(--border-soft)] bg-white px-2 py-1 outline-none transition focus:border-[var(--accent)]"
         />
       ) : (
-        `$${row.original.price.toFixed(2)}`
+        <span className="inline-flex h-9 items-center">{`$${row.original.price.toFixed(2)}`}</span>
       ),
   },
   {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => (
-      <div className="flex flex-col gap-1">
+      <div className="flex h-9 items-center">
         <div className="flex gap-2">
           {editingId === row.original.id ? (
             <>
               <button
                 onClick={() => onSaveEdit(row.original.id)}
                 disabled={!canSaveEdit || isMutating}
-                className="rounded-lg bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-800 hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-45"
+                className="h-8 rounded-lg bg-emerald-100 px-3 text-sm font-medium text-emerald-800 hover:bg-emerald-200 disabled:cursor-not-allowed disabled:opacity-45"
               >
                 {isMutating ? "Saving..." : "Save"}
               </button>
               <button
                 onClick={onCancelEdit}
                 disabled={isMutating}
-                className="rounded-lg border border-[var(--border-soft)] px-3 py-1 text-sm font-medium text-[var(--text-muted)] hover:bg-[#f3ebe0] disabled:cursor-not-allowed disabled:opacity-45"
+                className="h-8 rounded-lg border border-[var(--border-soft)] px-3 text-sm font-medium text-[var(--text-muted)] hover:bg-[#f3ebe0] disabled:cursor-not-allowed disabled:opacity-45"
               >
                 Cancel
               </button>
@@ -118,7 +122,7 @@ export const createOrdersTableColumns = ({
               <button
                 onClick={() => onStartEdit(row.original)}
                 disabled={isMutating}
-                className="rounded-lg bg-[#dbe9ff] px-3 py-1 text-sm font-medium text-[#244d8f] hover:bg-[#c6ddff] disabled:cursor-not-allowed disabled:opacity-45"
+                className="h-8 rounded-lg bg-[#dbe9ff] px-3 text-sm font-medium text-[#244d8f] hover:bg-[#c6ddff] disabled:cursor-not-allowed disabled:opacity-45"
               >
                 Edit
               </button>
@@ -127,16 +131,13 @@ export const createOrdersTableColumns = ({
                   await onDeleteOrder(row.original.id);
                 }}
                 disabled={isMutating}
-                className="rounded-lg bg-[#ffe4dc] px-3 py-1 text-sm font-medium text-[#992f12] hover:bg-[#ffd7cc] disabled:cursor-not-allowed disabled:opacity-45"
+                className="h-8 rounded-lg bg-[#ffe4dc] px-3 text-sm font-medium text-[#992f12] hover:bg-[#ffd7cc] disabled:cursor-not-allowed disabled:opacity-45"
               >
                 {isMutating ? "Deleting..." : "Delete"}
               </button>
             </>
           )}
         </div>
-        {editingId === row.original.id && !canSaveEdit ? (
-          <span className="text-xs text-red-600">{draftErrorMessage}</span>
-        ) : null}
       </div>
     ),
   },
