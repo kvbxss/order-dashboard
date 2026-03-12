@@ -49,7 +49,7 @@ export default function OrdersPage() {
           <button
             type="button"
             onClick={resetOrders}
-            className="rounded-md border border-[var(--border-soft)] bg-[#f4ecdf] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)] transition hover:bg-[#eadfcd]"
+            className="rounded-md border border-(--border-soft) bg-[#f4ecdf] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-(--text-muted) transition hover:bg-[#eadfcd]"
           >
             Reset orders
           </button>

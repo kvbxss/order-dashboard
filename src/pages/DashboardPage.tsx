@@ -24,11 +24,11 @@ export default function DashboardPage() {
       </div>
 
       {totalOrders === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[var(--border-soft)] bg-[var(--bg-panel)] p-4 text-sm text-[var(--text-muted)]">
+        <div className="rounded-2xl border border-dashed border-(--border-soft) bg-(--bg-panel) p-4 text-sm text-(--text-muted)">
           No orders yet. Create your first order in{" "}
           <Link
             to="/orders"
-            className="font-semibold text-[var(--accent)] underline underline-offset-2"
+            className="font-semibold text-(--accent) underline underline-offset-2"
           >
             Orders
           </Link>
