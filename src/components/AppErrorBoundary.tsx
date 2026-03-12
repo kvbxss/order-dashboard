@@ -36,9 +36,7 @@ export class AppErrorBoundary extends Component<
       return (
         <main className="mx-auto mt-8 max-w-2xl rounded-2xl border border-red-200 bg-red-50 p-6 text-red-800">
           <h1 className="text-2xl font-bold">Something went wrong</h1>
-          <p className="mt-2 text-sm">
-            The app hit an unexpected error. Reload to recover.
-          </p>
+          <p className="mt-2 text-sm">{this.state.error?.message}</p>
           <button
             type="button"
             onClick={this.handleReload}
